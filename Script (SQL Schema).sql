@@ -203,7 +203,8 @@ create table staff(
    staff_id  varchar2(10)  not null,
    employee_manger  varchar2(30),
 CONSTRAINT staff_id_pk primary key(staff_id),
-CONSTRAINT staff_id_fk foreign key (staff_id) references employee(employee_id)
+CONSTRAINT staff_id_fk foreign key (staff_id) references employee(employee_id),
+CONSTRAINT employee_manger_fk foreign key (employee_manger) references employee(employee_id)
 );
 
 create table top_management(
