@@ -155,7 +155,7 @@ CONSTRAINT level_id_fk foreign key(level_id) references levels(level_id)
 create table customer_service(
    cust_service_id  varchar2(10)  not null,
    call_num  number(20),
-   branch_no VARCHAR2(10)
+   branch_no VARCHAR2(10),
 CONSTRAINT cust_service_id_pk primary key(cust_service_id),
 CONSTRAINT cust_service_id_fk foreign key (cust_service_id) references designation(designation_id ),
 CONSTRAINT cust_service_branch_no_fk foreign key (branch_no) references branch(branch_no)
