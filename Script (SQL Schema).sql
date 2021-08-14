@@ -69,7 +69,7 @@ create table book(
    book_code  varchar2(10)  not null,
    book_title  varchar2(50)  not null,
    book_price  number(5,2),
-   book_description  varchar2(100),
+   book_description  varchar2(200),
    book_language  varchar2(20),
    book_author  varchar2(30),
    book_publisher  varchar2(30),
