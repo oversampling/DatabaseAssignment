@@ -1,3 +1,5 @@
+-- You can edit this by pressing . in your keyboard
+
 drop table customer cascade constraints;
 drop table membership cascade constraints;
 drop table normal_member cascade constraints;
