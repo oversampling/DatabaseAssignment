@@ -260,8 +260,8 @@ create table sale(
    package_id  varchar2(10) NULL,
    book_sales_quantity  number(10),
 CONSTRAINT sale_id_pk primary key(sale_id),
-CONSTRAINT payment_id_fk foreign key(payment_id) references book(book_code),
-CONSTRAINT book_code_sale_fk foreign key(book_code) references customer(customer_id),
+CONSTRAINT payment_id_fk foreign key(payment_id) references payment(payment_id),
+CONSTRAINT book_code_sale_fk foreign key(book_code) references book(book_code),
 CONSTRAINT package_id_fk foreign key(package_id) references membership_package(package_id)
 );
 
@@ -295,7 +295,6 @@ grant select on book to customer, membership;
 grant select on branch to customer, membership;
 grant select on all_tables to staff;
 grant all privileges to admin;
-
 
 insert into customer values ('C001','Kenny Tan','Male','Taman Permai, 31400 Ipoh, Perak','kenny@gmail.com','15-Aug-95');
 insert into customer values ('C002','Ahmad Hafiz','Male','Taman Kaya, 32000 Kuala Lumpur','ahmad@hotmail.com','30-Jul-99');
@@ -333,7 +332,7 @@ insert into book values ('8175157526','An Introduction to Database Systems',120.
 insert into book values ('0525457585','Harry Potter and the Chamber of Secrets',70.99,'Ever since Harry Potter had come home for the summer, the Dursleys had been so mean and hideous that all Harry wanted was to get back to the Hogwarts School for Witchcraft and Wizardry.','English','J.K. Rowling','Arthur A. Levine Books');
 insert into book values ('0143039954','The Odyssey',39.90,'If the Iliad is the world''s greatest war epic, then the Odyssey is literature''s grandest evocation of everyman''s journey though life.','English','Robert Fagles','Penguin Classics');
 insert into book values ('0141026294','Odysseus Returns Home',39.90,'After ten years at war and ten years wandering the world, Odysseus has finally returned home. But he cannot reveal his identity to his faithful wife Penelope.','English','Robert Eagles','Penguin Books');
-insert into book values ('1501118811','House of Sticks',50.90,'An intimate beautifully written coming-of-age memoir recounting young girl''s journey from war-torn Vietnam to Ridgewood, Queens, her struggle to find her voice amid clashing cultural expectations.','English','Ly Tran','Scribner');
+insert into book values ('1501118811','House of Sticks',50.90,'An intimate, beautifully written coming-of-age memoir recounting a young girl''s journey from war-torn Vietnam to Ridgewood, Queens, her struggle find her voice clashing cultural expectations.','English','Ly Tran','Scribner');
 insert into book values ('0470624701','Fundamentals of Database Management Systems',150.00,'This lean, focused text concentrates on giving students a clear understanding of database fundamentals while providing a broad survey of all the major topics of the field.','English','Mark L. Gillenson','Galgotia Publications Pvt Ltd');
 
 insert into category values ('C01','Fiction');
@@ -475,7 +474,7 @@ insert into employee values('E001','Eazin Poe','Male','0164201994',to_date('1994
 insert into employee values('E002','Stefan Guo','Male','014109679',to_date('1994-04-10', 'yyyy-mm-dd'),'5000','D02','BR01');
 insert into employee values('E003','Vera Tiff','Female','0165587785',to_date('1997-06-11', 'yyyy-mm-dd'),'5000','D02','BR02');
 insert into employee values('E004','Rosoria Wang','Female','0171231234',to_date('1988-03-23', 'yyyy-mm-dd'),'2000','D11','BR01');
-insert into employee values('E005','Qi Si Jun','Male','0176556710',to_date('1993-10-14', 'yyyy-mm-dd'), '2000', 'D12','BR02');
+insert into employee values('E005','Qi Si Jun','Male','0176556710',to_date('1993-10-14', 'yyyy-mm-dd'), '2000','D12','BR02');
 insert into employee values('E006','Luo Yat Zhou','Female','0151234321',to_date('1980-08-31', 'yyyy-mm-dd'),'2000','D13','BR03');	
 insert into employee values('E007','Lee Zi Jia','Male','0111235678',to_date('1981-10-10', 'yyyy-mm-dd'),'2000','D14','BR04');
 insert into employee values('E008','Byun Baek Hyun','Male','0175467765',to_date('1999-10-11', 'yyyy-mm-dd'),'2000','D15','BR05');
@@ -514,21 +513,57 @@ insert into staff values('E020','E003');
 
 insert into top_management values('E001',to_date('2021-08-18', 'yyyy-mm-dd'),'5pm','Room 6 Branch Melaka');
 
-insert into payment values ('P001', 'E004', 'C001', '15-May-21',  TO_CHAR(TO_DATE('1730', 'HH24MI'), 'HH24MI'), 'Cash', 67.35);
-insert into payment values ('P002', 'E004', 'C001', '17-May-21', TO_CHAR(TO_DATE('1330', 'HH24MI'), 'HH24MI'), 'Cash', 31.10);
-insert into payment values ('P003', 'E004', 'C002', '24-May-21', TO_CHAR(TO_DATE('1245', 'HH24MI'), 'HH24MI'), 'Credit Card', 70.65);
-insert into payment values ('P004', 'E008', 'C002', '12-Jun-21', TO_CHAR(TO_DATE('1020', 'HH24MI'), 'HH24MI'), 'Credit Card', 103.20);
-insert into payment values ('P005', 'E008', 'C003', '25-Jun-21', TO_CHAR(TO_DATE('1525', 'HH24MI'), 'HH24MI'), 'Cash', 40.20);
-insert into payment values ('P006', 'E007', 'C003', '21-Aug-21', TO_CHAR(TO_DATE('1412', 'HH24MI'), 'HH24MI'), 'Cash', 35.75);
-insert into payment values ('P007', 'E007', 'C004', '12-Jul-21', TO_CHAR(TO_DATE('1755', 'HH24MI'), 'HH24MI'), 'Credit Card', 140.10);
-insert into payment values ('P008', 'E007', 'C004', '18-Apr-21', TO_CHAR(TO_DATE('1125', 'HH24MI'), 'HH24MI'), 'Credit Card', 85.65);
-insert into payment values ('P009', 'E005', 'C005', '13-May-21', TO_CHAR(TO_DATE('1845', 'HH24MI'), 'HH24MI'), 'Cash', 56.85);
-insert into payment values ('P010', 'E005', 'C006', '19-Apr-21', TO_CHAR(TO_DATE('1935', 'HH24MI'), 'HH24MI'), 'Credit Card', 76.25);
-insert into payment values ('P011', 'E004', 'C007', '26-May-21', TO_CHAR(TO_DATE('1615', 'HH24MI'), 'HH24MI'), 'Cash', 50.55);
-insert into payment values ('P012', 'E004', 'C008', '3-Jun-21', TO_CHAR(TO_DATE('1235', 'HH24MI'), 'HH24MI'), 'Credit Card', 66.70);
-insert into payment values ('P013', 'E005', 'C008', '14-Aug-21', TO_CHAR(TO_DATE('1120', 'HH24MI'), 'HH24MI'), 'Cash', 66.70);
-insert into payment values ('P014', 'E007', 'C008', '7-Aug-21', TO_CHAR(TO_DATE('1040', 'HH24MI'), 'HH24MI'), 'Credit Card', 66.70);
-insert into payment values ('P015', 'E004', 'C008', '14-Aug-21', TO_CHAR(TO_DATE('1425', 'HH24MI'), 'HH24MI'), 'Cash', 66.70);
-insert into payment values ('P016', 'E008', 'C008', '31-Aug-21', TO_CHAR(TO_DATE('1500', 'HH24MI'), 'HH24MI'), 'Credit Card', 66.70);
-insert into payment values ('P017', 'E004', 'C008', '21-Aug-21', TO_CHAR(TO_DATE('1400', 'HH24MI'), 'HH24MI'), 'Cash', 66.70);
-insert into payment values ('P018', 'E004', 'C008', '21-Aug-21', TO_CHAR(TO_DATE('1100', 'HH24MI'), 'HH24MI'), 'Credit Card', 66.70);
+insert into payment values ('P001', 'E004', 'C001', '15-May-21',  TO_CHAR(TO_DATE('1730', 'HH24MI'), 'HH24MI'), 'Cash', 840.89);
+insert into payment values ('P002', 'E004', 'C001', '17-May-21', TO_CHAR(TO_DATE('1330', 'HH24MI'), 'HH24MI'), 'Cash', 3259.4);
+insert into payment values ('P003', 'E004', 'C002', '24-May-21', TO_CHAR(TO_DATE('1245', 'HH24MI'), 'HH24MI'), 'Credit Card', 372.5);
+insert into payment values ('P004', 'E008', 'C002', '12-Jun-21', TO_CHAR(TO_DATE('1020', 'HH24MI'), 'HH24MI'), 'Credit Card', 2346.93);
+insert into payment values ('P005', 'E008', 'C003', '25-Jun-21', TO_CHAR(TO_DATE('1525', 'HH24MI'), 'HH24MI'), 'Cash', 407.92);
+insert into payment values ('P006', 'E007', 'C003', '21-Aug-21', TO_CHAR(TO_DATE('1412', 'HH24MI'), 'HH24MI'), 'Cash', 12611.73);
+insert into payment values ('P007', 'E007', 'C004', '12-Jul-21', TO_CHAR(TO_DATE('1755', 'HH24MI'), 'HH24MI'), 'Credit Card', 587.92);
+insert into payment values ('P008', 'E007', 'C004', '18-Apr-21', TO_CHAR(TO_DATE('1125', 'HH24MI'), 'HH24MI'), 'Credit Card', 237.7);
+insert into payment values ('P009', 'E005', 'C005', '13-May-21', TO_CHAR(TO_DATE('1845', 'HH24MI'), 'HH24MI'), 'Cash', 70.99);
+insert into payment values ('P010', 'E005', 'C006', '19-Apr-21', TO_CHAR(TO_DATE('1935', 'HH24MI'), 'HH24MI'), 'Credit Card', 370);
+insert into payment values ('P011', 'E004', 'C007', '26-May-21', TO_CHAR(TO_DATE('1615', 'HH24MI'), 'HH24MI'), 'Cash', 1004.5);
+insert into payment values ('P012', 'E004', 'C008', '3-Jun-21', TO_CHAR(TO_DATE('1235', 'HH24MI'), 'HH24MI'), 'Credit Card', 310.79);
+insert into payment values ('P013', 'E005', 'C008', '14-Aug-21', TO_CHAR(TO_DATE('1120', 'HH24MI'), 'HH24MI'), 'Cash', 119.7);
+insert into payment values ('P014', 'E007', 'C008', '7-Aug-21', TO_CHAR(TO_DATE('1040', 'HH24MI'), 'HH24MI'), 'Credit Card', 283.96);
+insert into payment values ('P015', 'E004', 'C008', '14-Aug-21', TO_CHAR(TO_DATE('1425', 'HH24MI'), 'HH24MI'), 'Cash', 1703.95);
+insert into payment values ('P016', 'E008', 'C008', '31-Aug-21', TO_CHAR(TO_DATE('1500', 'HH24MI'), 'HH24MI'), 'Credit Card', 1649.88);
+insert into payment values ('P017', 'E004', 'C008', '21-Aug-21', TO_CHAR(TO_DATE('1400', 'HH24MI'), 'HH24MI'), 'Cash', 1636.73);
+insert into payment values ('P018', 'E004', 'C008', '21-Aug-21', TO_CHAR(TO_DATE('1100', 'HH24MI'), 'HH24MI'), 'Credit Card', 141.98);
+
+INSERT INTO sale VALUES('S001', 'P001', NULL, 'PK001', NULL);
+INSERT INTO sale VALUES('S002', 'P001', '9780525541', NULL, 1);
+INSERT INTO sale VALUES('S003', 'P001', '0385544251', NULL, 10);
+INSERT INTO sale VALUES('S004', 'P002', '0385544251', NULL, 20);
+INSERT INTO sale VALUES('S005', 'P002', '0143136666', NULL, 50);
+INSERT INTO sale VALUES('S007', 'P003', '1984881787', 'PK002', 5);
+INSERT INTO sale VALUES('S008', 'P004', '8175157526', NULL, 15);
+INSERT INTO sale VALUES('S009', 'P004', '0525457585', 'PK003', 7);
+INSERT INTO sale VALUES('S010', 'P005', '0143039954', NULL, 8);
+INSERT INTO sale VALUES('S011', 'P006', '0143039954', NULL, 7);
+INSERT INTO sale VALUES('S012', 'P006', '0141026294', NULL, 17);
+INSERT INTO sale VALUES('S013', 'P006', '1501118811', NULL, 30);
+INSERT INTO sale VALUES('S014', 'P006', '0470624701', NULL, 50);
+INSERT INTO sale VALUES('S015', 'P006', '9780525541', NULL, 50);
+INSERT INTO sale VALUES('S016', 'P007', '0385544251', NULL, 3);
+INSERT INTO sale VALUES('S017', 'P007', '0143136666', NULL, 5);
+INSERT INTO sale VALUES('S018', 'P007', '8175157526', NULL, 1);
+INSERT INTO sale VALUES('S019', 'P008', '1501118811', 'PK004', 3);
+INSERT INTO sale VALUES('S020', 'P010', '0470624701', 'PK002', 2);
+INSERT INTO sale VALUES('S021', 'P011', '1501118811', NULL, 5);
+INSERT INTO sale VALUES('S022', 'P011', '0470624701', NULL, 5);
+INSERT INTO sale VALUES('S023', 'P012', NULL, 'PK005', NULL);
+INSERT INTO sale VALUES('S024', 'P012', '0525457585', NULL, 1);
+INSERT INTO sale VALUES('S025', 'P012', '0143039954', NULL, 2);
+INSERT INTO sale VALUES('S026', 'P013', '0141026294', NULL, 3);
+INSERT INTO sale VALUES('S027', 'P014', '0525457585', NULL, 4);
+INSERT INTO sale VALUES('S028', 'P015', '0525457585', NULL, 5);
+INSERT INTO sale VALUES('S029', 'P015', '8175157526', NULL, 7);
+INSERT INTO sale VALUES('S030', 'P015', '9780525541', NULL, 10);
+INSERT INTO sale VALUES('S031', 'P016', '0143039954', NULL, 20);
+INSERT INTO sale VALUES('S032', 'P016', '0525457585', NULL, 12);
+INSERT INTO sale VALUES('S033', 'P017', '0385544251', NULL, 13);
+INSERT INTO sale VALUES('S034', 'P017', '0143039954', NULL, 14);
+INSERT INTO sale VALUES('S035', 'P018', '0385544251', NULL, 2);
+INSERT INTO sale VALUES('S036', 'P009', '0385544251', NULL, 1);
