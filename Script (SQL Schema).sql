@@ -219,7 +219,6 @@ CONSTRAINT top_manage_id_fk foreign key (top_manage_id) references employee(empl
 create table full_time(
    full_time_id  varchar2(10)  not null,
    leave_allowance  number(10,2),
-   working_hours  number(10,2),
 CONSTRAINT full_time_id_pk primary key(full_time_id),
 CONSTRAINT full_time_id_fk foreign key (full_time_id) references employee(employee_id)
 );
@@ -490,6 +489,28 @@ insert into employee values('E017','Jarod Edwin','Male','0101100110',to_date('19
 insert into employee values('E018','Yew Mee Yiu','Female','0123737337',to_date('1977-10-26', 'yyyy-mm-dd'),'1100','D18','BR03');
 insert into employee values('E019','Cham Que Tiew','Male','0114362345',to_date('1975-01-05', 'yyyy-mm-dd'),'750','D19','BR04');
 insert into employee values('E020','Sabrini Ninina','Female','0138598898',to_date('1977-03-11', 'yyyy-mm-dd'),'1500','D20','BR05');
+
+insert into full_time values('E001','15');
+insert into full_time values('E002','10');
+insert into full_time values('E003','12');
+insert into full_time values('E004','7');
+insert into full_time values('E005','7');
+insert into full_time values('E006','6');
+insert into full_time values('E007','5');
+insert into full_time values('E008','5');
+insert into full_time values('E009','8');
+insert into full_time values('E011','5');
+insert into full_time values('E013','4');
+insert into full_time values('E014','3');
+insert into full_time values('E015','3');
+insert into full_time values('E016','6');
+insert into full_time values('E020','5');
+
+insert into part_time values('E010','8','5');
+insert into part_time values('E012','8','5');
+insert into part_time values('E017','10','6');
+insert into part_time values('E018','10','5');
+insert into part_time values('E019','10','5');
 
 insert into manager values('E002','1100');
 insert into manager values('E003','2100');
